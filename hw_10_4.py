@@ -2,7 +2,7 @@ import copy
 
 
 class Document:
-    def __init__(self, title: str, author: str, content: str, sections=None, metadata=None):
+    def __init__(self, title: str, author: str, content: str, sections=None, metadata=None) -> None:
         """
         Initializes a document object.
 
@@ -22,7 +22,7 @@ class Document:
         self.sections = sections if sections is not None else []
         self.metadata = metadata if metadata is not None else {}
 
-    def clone(self):
+    def clone(self) -> None:
         """
         Creates a deep copy of the current document.
 
@@ -34,7 +34,7 @@ class Document:
         """
         return copy.deepcopy(self)
 
-    def __repr__(self):
+    def __repr__(self) -> None:
         """
         Returns a string representation of the document.
 
@@ -51,7 +51,7 @@ class Document:
 
 
 class PrototypeRegistry:
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Initializes an empty prototype registry.
 
@@ -63,7 +63,7 @@ class PrototypeRegistry:
         """
         self._templates = {}
 
-    def register(self, name: str, prototype: Document):
+    def register(self, name: str, prototype: Document) -> None:
         """
         Registers a document prototype in the registry.
 
@@ -76,7 +76,7 @@ class PrototypeRegistry:
         """
         self._templates[name] = prototype
 
-    def unregister(self, name: str):
+    def unregister(self, name: str) -> None:
         """
         Removes a document prototype from the registry.
 
@@ -93,7 +93,7 @@ class PrototypeRegistry:
             raise KeyError(f"Шаблон '{name}' не знайдено")
         del self._templates[name]
 
-    def clone(self, name: str):
+    def clone(self, name: str) -> None:
         """
         Creates a copy of a registered document prototype.
 
@@ -110,7 +110,7 @@ class PrototypeRegistry:
             raise KeyError(f"Шаблон '{name}' не знайдено")
         return self._templates[name].clone()
 
-    def get_templates(self):
+    def get_templates(self) -> None:
         """
         Returns names of all registered templates.
 

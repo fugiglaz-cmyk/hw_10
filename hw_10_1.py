@@ -1,5 +1,5 @@
 class BankAccount:
-    def __init__(self, owner: str, _balance: int, accaunt_number: int):
+    def __init__(self, owner: str, _balance: int, accaunt_number: int) -> None:
         """
         Initializes a bank account.
 
@@ -15,7 +15,7 @@ class BankAccount:
         self._balance = _balance
         self._accaunt_number = accaunt_number
 
-    def deposit(self, amount: int):
+    def deposit(self, amount: int) -> None:
         """
         Deposits money into the bank account.
 
@@ -30,7 +30,7 @@ class BankAccount:
         elif amount <= 0:
             print("Amount is can't be draw or smaller than 0")
 
-    def withdraw(self, amount: int):
+    def withdraw(self, amount: int) -> None:
         """
         Withdraws money from the bank account.
 
@@ -46,7 +46,7 @@ class BankAccount:
         elif amount > self._balance:
             print("Amount is bigger than balance")
 
-    def transfer(self, other_accaunt: int, amount: int):
+    def transfer(self, other_accaunt: int, amount: int) -> None:
         """
         Transfers money to another bank account.
 
@@ -64,7 +64,7 @@ class BankAccount:
         elif other_accaunt == self._accaunt_number:
             raise TypeError("You can't transfer money to yourself")
 
-    def __str__(self):
+    def __str__(self) -> None:
         """
         Returns a readable string representation of the bank account.
 
@@ -76,7 +76,7 @@ class BankAccount:
         """
         return f"Balance is: {self._balance}"
 
-    def __repr__(self):
+    def __repr__(self) -> None:
         """
         Returns a string representation of the bank account.
 
@@ -90,7 +90,7 @@ class BankAccount:
 
 
 class SavingsAccount(BankAccount):
-    def __init__(self, owner: str, _balance: int, accaunt_number: int, balance_savings: int):
+    def __init__(self, owner: str, _balance: int, accaunt_number: int, balance_savings: int) -> None:
         """
         Initializes a savings account.
 
@@ -108,7 +108,7 @@ class SavingsAccount(BankAccount):
         self._accaunt_number = accaunt_number
         self._savings = balance_savings
 
-    def add_interest(self, interest_savings: int):
+    def add_interest(self, interest_savings: int) -> None:
         """
         Adds interest to the savings balance.
 
@@ -123,7 +123,7 @@ class SavingsAccount(BankAccount):
 
 
 class BusinessAccount(BankAccount):
-    def __init__(self, owner: str, _balance: int, accaunt_number: int, credit_limit: int):
+    def __init__(self, owner: str, _balance: int, accaunt_number: int, credit_limit: int) -> None:
         """
         Initializes a business bank account.
 
@@ -141,7 +141,7 @@ class BusinessAccount(BankAccount):
         self._accaunt_number = accaunt_number
         self._credit_limit = credit_limit
 
-    def withdraw_limit(self, amount: int):
+    def withdraw_limit(self, amount: int) -> None:
         """
         Withdraws money considering the credit limit.
 

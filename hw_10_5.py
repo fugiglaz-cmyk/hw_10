@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 class DataProcessor(ABC):
-    def process(self, source: str):
+    def process(self, source: str) -> None:
         """
         Executes the complete data processing algorithm.
 
@@ -22,7 +22,7 @@ class DataProcessor(ABC):
         print("Обробку завершено")
 
     @abstractmethod
-    def load(self, source):
+    def load(self, source) -> None:
         """
         Loads data from a source.
 
@@ -38,7 +38,7 @@ class DataProcessor(ABC):
         pass
 
     @abstractmethod
-    def validate(self, data):
+    def validate(self, data) -> None:
         """
         Validates loaded data.
 
@@ -54,7 +54,7 @@ class DataProcessor(ABC):
         pass
 
     @abstractmethod
-    def transform(self, data):
+    def transform(self, data) -> None:
         """
         Transforms data into the required format.
 
@@ -67,7 +67,7 @@ class DataProcessor(ABC):
         pass
 
     @abstractmethod
-    def save(self, data):
+    def save(self, data) -> None:
         """
         Saves transformed data.
 
@@ -81,7 +81,7 @@ class DataProcessor(ABC):
 
 
 class CSVImporter(DataProcessor):
-    def load(self, source: str):
+    def load(self, source: str) -> None:
         """
         Loads CSV data.
 
@@ -98,7 +98,7 @@ class CSVImporter(DataProcessor):
             "300"
         ]
 
-    def validate(self, data: list):
+    def validate(self, data: list) -> None:
         """
         Checks whether CSV data is not empty.
 
@@ -115,7 +115,7 @@ class CSVImporter(DataProcessor):
         if not data:
             raise ValueError("Порожні дані")
 
-    def transform(self, data: list):
+    def transform(self, data: list) -> None:
         """
         Converts CSV string values into integers.
 
@@ -128,7 +128,7 @@ class CSVImporter(DataProcessor):
         print("Трансформація CSV")
         return [int(value) for value in data]
 
-    def save(self, data: list):
+    def save(self, data: list) -> None:
         """
         Displays the processed CSV data.
 
@@ -142,7 +142,7 @@ class CSVImporter(DataProcessor):
 
 
 class JSONImporter(DataProcessor):
-    def load(self, source: str):
+    def load(self, source: str) -> None:
         """
         Loads JSON data.
 
@@ -157,7 +157,7 @@ class JSONImporter(DataProcessor):
             "values": [100, 200, 300]
         }
 
-    def validate(self, data: dict):
+    def validate(self, data: dict) -> None:
         """
         Checks whether the JSON data contains the required field.
 
@@ -174,7 +174,7 @@ class JSONImporter(DataProcessor):
         if "values" not in data:
             raise ValueError("Відсутнє поле values")
 
-    def transform(self, data: dict):
+    def transform(self, data: dict) -> None:
         """
         Calculates the sum of JSON values.
 
@@ -189,7 +189,7 @@ class JSONImporter(DataProcessor):
             "total": sum(data["values"])
         }
 
-    def save(self, data: dict):
+    def save(self, data: dict) -> None:
         """
         Displays the processed JSON data.
 
@@ -203,7 +203,7 @@ class JSONImporter(DataProcessor):
 
 
 class XMLImporter(DataProcessor):
-    def __init__(self, output_path: str = "output.xml"):
+    def __init__(self, output_path: str = "output.xml") -> None:
         """
         Initializes the XML importer.
 
@@ -216,7 +216,7 @@ class XMLImporter(DataProcessor):
         """
         self.output_path = output_path
 
-    def load(self, source: str):
+    def load(self, source: str) -> None:
         """
         Loads and parses an XML file.
 
@@ -235,7 +235,7 @@ class XMLImporter(DataProcessor):
         except ET.ParseError as e:
             raise ValueError(f"Некоректний XML: {e}")
 
-    def validate(self, data: ET.Element):
+    def validate(self, data: ET.Element) -> None:
         """
         Validates the structure of the XML document.
 
@@ -260,7 +260,7 @@ class XMLImporter(DataProcessor):
         if not data.findall("item"):
             raise ValueError("Не знайдено жодного елемента <item>")
 
-    def transform(self, data: ET.Element):
+    def transform(self, data: ET.Element) -> None:
         """
         Extracts XML item values and converts them into integers.
 
@@ -280,7 +280,7 @@ class XMLImporter(DataProcessor):
 
         return result
 
-    def save(self, data: list):
+    def save(self, data: list) -> None:
         """
         Creates and saves a new XML file.
 

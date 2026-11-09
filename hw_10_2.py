@@ -1,5 +1,5 @@
 class Product:
-    def __init__(self, name: str, price: int, quantity: int, category: str):
+    def __init__(self, name: str, price: int, quantity: int, category: str) -> None:
         """
         Initializes a product object.
 
@@ -18,7 +18,7 @@ class Product:
         self.category = category
 
     @property
-    def price(self):
+    def price(self) -> None:
         """
         Gets the product price.
 
@@ -31,7 +31,7 @@ class Product:
         return self._price
 
     @price.setter
-    def price(self, value: int):
+    def price(self, value: int) -> None:
         """
         Sets the product price.
 
@@ -49,7 +49,7 @@ class Product:
         self._price = value
 
     @property
-    def quantity(self):
+    def quantity(self) -> None:
         """
         Gets the product quantity.
 
@@ -62,7 +62,7 @@ class Product:
         return self._quantity
 
     @quantity.setter
-    def quantity(self, value: int):
+    def quantity(self, value: int) -> None:
         """
         Sets the product quantity.
 
@@ -80,7 +80,7 @@ class Product:
         self._quantity = value
 
     @property
-    def name(self):
+    def name(self) -> None:
         """
         Gets the product name.
 
@@ -93,7 +93,7 @@ class Product:
         return self._name
 
     @name.setter
-    def name(self, value: str):
+    def name(self, value: str) -> None:
         """
         Sets the product name.
 
@@ -110,7 +110,7 @@ class Product:
             raise ValueError("Incorrect name")
         self._name = value
 
-    def increase_stock(self, amount: int):
+    def increase_stock(self, amount: int) -> None:
         """
         Increases product stock.
 
@@ -123,7 +123,7 @@ class Product:
         if amount > 0:
             self.quantity += amount
 
-    def decrease_stock(self, amount: int):
+    def decrease_stock(self, amount: int) -> None:
         """
         Decreases product stock.
 
@@ -140,7 +140,7 @@ class Product:
             raise ValueError("Incorrect stock amount")
         self.quantity -= amount
 
-    def calculate_total_value(self):
+    def calculate_total_value(self) -> None:
         """
         Calculates total value of products in stock.
 
@@ -152,7 +152,7 @@ class Product:
         """
         return self.quantity * self.price
 
-    def __str__(self):
+    def __str__(self) -> None:
         """
         Returns a readable product representation.
 
@@ -164,7 +164,7 @@ class Product:
         """
         return f"Name: {self.name}, Price: {self.price}"
 
-    def __repr__(self):
+    def __repr__(self) -> None:
         """
         Returns a detailed product representation.
 
@@ -179,7 +179,7 @@ class Product:
             f"Quantity: {self.quantity}, Category: {self.category}"
         )
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> None:
         """
         Compares two products by price.
 
@@ -193,7 +193,7 @@ class Product:
             return NotImplemented
         return self.price == other.price
 
-    def __lt__(self, other):
+    def __lt__(self, other) -> None:
         """
         Compares two products by price.
 
@@ -207,7 +207,7 @@ class Product:
             return NotImplemented
         return self.price < other.price
 
-    def __add__(self, other):
+    def __add__(self, other) -> None:
         """
         Adds quantities of products in the same category.
 
@@ -224,7 +224,7 @@ class Product:
             return self.quantity + other.quantity
         return None
 
-    def __mul__(self, number: int):
+    def __mul__(self, number: int) -> None:
         """
         Multiplies product quantity by a number.
 
