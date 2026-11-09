@@ -5,7 +5,7 @@ from pathlib import Path
 
 class DataProcessor(ABC):
     def process(self, source: str):
-        """func for process algorithm"""
+        """method for process algorithm"""
         print("Початок обробки")
         data = self.load(source)
         self.validate(data)
@@ -32,7 +32,7 @@ class DataProcessor(ABC):
 
 class CSVImporter(DataProcessor):
     def load(self, source: str):
-        """func for load"""
+        """method for load"""
         print(f"Завантаження CSV: {source}")
         return [
             "100",
@@ -41,31 +41,31 @@ class CSVImporter(DataProcessor):
         ]
 
     def validate(self, data: str):
-        """func for validation"""
+        """method for validation"""
         print("Перевірка CSV")
         if not data:
             raise ValueError("Порожні дані")
 
     def transform(self, data: str):
-        """func for transform"""
+        """method for transform"""
         print("Трансформація CSV")
         return [int(value) for value in data]
 
     def save(self, data: str):
-        """func for save"""
+        """method for save"""
         print(f"Збереження CSV: {data}")
 
 
 class JSONImporter(DataProcessor):
     def load(self, source: str):
-        """func for load"""
+        """method for load"""
         print(f"Завантаження JSON: {source}")
         return {
             "values": [100, 200, 300]
         }
 
     def validate(self, data: str):
-        """func for validation"""
+        """method for validation"""
         print("Перевірка JSON")
         if "values" not in data:
             raise ValueError(
@@ -73,24 +73,24 @@ class JSONImporter(DataProcessor):
             )
 
     def transform(self, data: str):
-        """func for transform"""
+        """method for transform"""
         print("Трансформація JSON")
         return {
             "total": sum(data["values"])
         }
 
     def save(self, data: str):
-        """func for save"""
+        """method for save"""
         print(f"Збереження JSON: {data}")
 
 
 class XMLImporter(DataProcessor):
     def __init__(self, output_path="output.xml"):
-        """function for initialization"""
+        """method for initialization"""
         self.output_path = output_path
 
     def load(self, source: str):
-        """func for load"""
+        """method for load"""
         print(f"Завантаження XML: {source}")
         try:
             return ET.parse(source).getroot()
@@ -98,7 +98,7 @@ class XMLImporter(DataProcessor):
             raise ValueError(f"Некоректний XML: {e}")
 
     def validate(self, data: str):
-        """func for validation"""
+        """method for validation"""
         print("Перевірка XML")
         if data is None:
             raise ValueError("Порожні дані")
@@ -108,7 +108,7 @@ class XMLImporter(DataProcessor):
             raise ValueError("Не знайдено жодного елемента <item>")
 
     def transform(self, data: str):
-        """func for transform"""
+        """method for transform"""
         print("Трансформація XML")
         result = []
         for item in data.findall("item"):
@@ -118,7 +118,7 @@ class XMLImporter(DataProcessor):
         return result
 
     def save(self, data: str):
-        """func for save"""
+        """method for save"""
         print(f"Збереження XML: {data}")
         root = ET.Element("root")
         for value in data:

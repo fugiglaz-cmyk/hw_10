@@ -3,7 +3,7 @@ import copy
 
 class Document:
     def __init__(self, title: str, author: str, content: str, sections=None, metadata=None):
-        """function for initialization"""
+        """method for initialization"""
         self.title = title
         self.author = author
         self.content = content
@@ -11,38 +11,38 @@ class Document:
         self.metadata = metadata if metadata is not None else {}
 
     def clone(self):
-        """func for cloning"""
+        """method for cloning"""
         return copy.deepcopy(self)
 
     def __repr__(self):
-        """func for printing"""
+        """method for printing"""
         return (f"Document(title={self.title!r}, author={self.author!r}, "
                 f"sections={self.sections}, metadata={self.metadata})")
 
 
 class PrototypeRegistry:
     def __init__(self):
-        """function for initialization"""
+        """method for initialization"""
         self._templates = {}
 
     def register(self, name: str, prototype: str):
-        """func for registering"""
+        """method for registering"""
         self._templates[name] = prototype
 
     def unregister(self, name: str):
-        """func for unregistering"""
+        """method for unregistering"""
         if name not in self._templates:
             raise KeyError(f"Шаблон '{name}' не знайдено")
         del self._templates[name]
 
     def clone(self, name: str):
-        """"func for cloning"""
+        """method for cloning"""
         if name not in self._templates:
             raise KeyError(f"Шаблон '{name}' не знайдено")
         return self._templates[name].clone()
 
     def get_templates(self):
-        """func for getting all templates"""
+        """method for getting all templates"""
         return list(self._templates.keys())
 
 
