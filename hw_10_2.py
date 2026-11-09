@@ -1,6 +1,17 @@
 class Product:
-    def __init__(self, name: str, price: str, quantity: str, category: str):
-        """method for initialization"""
+    def __init__(self, name: str, price: int, quantity: int, category: str):
+        """
+        Initializes a product object.
+
+        Args:
+            name (str): Product name.
+            price (int): Product price.
+            quantity (int): Product quantity.
+            category (str): Product category.
+
+        Returns:
+            None: Initializes product attributes.
+        """
         self.name = name
         self.price = price
         self.quantity = quantity
@@ -8,75 +19,221 @@ class Product:
 
     @property
     def price(self):
-        """method for property"""
+        """
+        Gets the product price.
+
+        Args:
+            None.
+
+        Returns:
+            int: Current product price.
+        """
         return self._price
 
     @price.setter
-    def price(self, value: None):
-        """method for property setter"""
+    def price(self, value: int):
+        """
+        Sets the product price.
+
+        Args:
+            value (int): New product price.
+
+        Returns:
+            None: Updates product price.
+
+        Raises:
+            ValueError: If price is negative.
+        """
         if value < 0:
             raise ValueError("Incorrect price")
         self._price = value
 
     @property
     def quantity(self):
-        """method for property"""
+        """
+        Gets the product quantity.
+
+        Args:
+            None.
+
+        Returns:
+            int: Current product quantity.
+        """
         return self._quantity
 
     @quantity.setter
-    def quantity(self, value: None):
-        """method for property setter"""
+    def quantity(self, value: int):
+        """
+        Sets the product quantity.
+
+        Args:
+            value (int): New product quantity.
+
+        Returns:
+            None: Updates product quantity.
+
+        Raises:
+            ValueError: If quantity is negative.
+        """
         if value < 0:
             raise ValueError("Incorrect quantity")
         self._quantity = value
 
     @property
     def name(self):
-        """method for property"""
+        """
+        Gets the product name.
+
+        Args:
+            None.
+
+        Returns:
+            str: Current product name.
+        """
         return self._name
 
     @name.setter
-    def name(self, value: None):
-        """method for property setter"""
-        if value == None:
+    def name(self, value: str):
+        """
+        Sets the product name.
+
+        Args:
+            value (str): New product name.
+
+        Returns:
+            None: Updates product name.
+
+        Raises:
+            ValueError: If name is None or empty.
+        """
+        if not value:
             raise ValueError("Incorrect name")
         self._name = value
 
     def increase_stock(self, amount: int):
-        """method for increase stock"""
-        self.quantity += amount
+        """
+        Increases product stock.
+
+        Args:
+            amount (int): Amount of products to add.
+
+        Returns:
+            None: Updates product quantity.
+        """
+        if amount > 0:
+            self.quantity += amount
 
     def decrease_stock(self, amount: int):
-        """method for decrease stock"""
+        """
+        Decreases product stock.
+
+        Args:
+            amount (int): Amount of products to remove.
+
+        Returns:
+            None: Updates product quantity.
+
+        Raises:
+            ValueError: If amount exceeds available stock.
+        """
+        if amount < 0 or amount > self.quantity:
+            raise ValueError("Incorrect stock amount")
         self.quantity -= amount
 
     def calculate_total_value(self):
-        """method for calculate total value"""
+        """
+        Calculates total value of products in stock.
+
+        Args:
+            None.
+
+        Returns:
+            int: Product price multiplied by quantity.
+        """
         return self.quantity * self.price
 
     def __str__(self):
-        """method for string"""
+        """
+        Returns a readable product representation.
+
+        Args:
+            None.
+
+        Returns:
+            str: Product name and price.
+        """
         return f"Name: {self.name}, Price: {self.price}"
 
     def __repr__(self):
-        """method for repr"""
-        return f"Name: {self.name}, Price: {self.price}, Quantity: {self.quantity}, Category: {self.category}"
+        """
+        Returns a detailed product representation.
 
-    def __eq__(self, other: str):
-        """method for equality"""
+        Args:
+            None.
+
+        Returns:
+            str: Product information.
+        """
+        return (
+            f"Name: {self.name}, Price: {self.price}, "
+            f"Quantity: {self.quantity}, Category: {self.category}"
+        )
+
+    def __eq__(self, other):
+        """
+        Compares two products by price.
+
+        Args:
+            other (Product): Another product.
+
+        Returns:
+            bool: True if prices are equal, otherwise False.
+        """
+        if not isinstance(other, Product):
+            return NotImplemented
         return self.price == other.price
 
-    def __lt__(self, other: str):
-        """method for less than"""
+    def __lt__(self, other):
+        """
+        Compares two products by price.
+
+        Args:
+            other (Product): Another product.
+
+        Returns:
+            bool: True if current product is cheaper.
+        """
+        if not isinstance(other, Product):
+            return NotImplemented
         return self.price < other.price
 
-    def __add__(self, other: str):
-        """method for addition"""
+    def __add__(self, other):
+        """
+        Adds quantities of products in the same category.
+
+        Args:
+            other (Product): Another product.
+
+        Returns:
+            int: Sum of quantities if categories match.
+            None: If categories are different.
+        """
+        if not isinstance(other, Product):
+            return NotImplemented
         if self.category == other.category:
             return self.quantity + other.quantity
+        return None
 
     def __mul__(self, number: int):
-        """method for multiplication"""
+        """
+        Multiplies product quantity by a number.
+
+        Args:
+            number (int): Multiplication factor.
+
+        Returns:
+            int: Result of multiplication.
+        """
         return self.quantity * number
 
 
@@ -88,3 +245,4 @@ print(prod1 + prod2)
 print(prod1 * 4)
 print(prod1 > prod2)
 print(prod1 == prod2)
+print(prod1.calculate_total_value())
